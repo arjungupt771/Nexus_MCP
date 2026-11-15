@@ -1,0 +1,1048 @@
+[
+  {
+    "server": "notes",
+    "tools": [
+      {
+        "name": "create_note",
+        "description": "Create a note with a title, content, and optional tags.",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "title": "Title",
+              "type": "string"
+            },
+            "content": {
+              "title": "Content",
+              "type": "string"
+            },
+            "tags": {
+              "anyOf": [
+                {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Tags"
+            }
+          },
+          "required": [
+            "title",
+            "content"
+          ],
+          "title": "create_noteArguments"
+        }
+      },
+      {
+        "name": "get_note",
+        "description": "Retrieve one note using its unique note ID.",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "note_id": {
+              "title": "Note Id",
+              "type": "string"
+            }
+          },
+          "required": [
+            "note_id"
+          ],
+          "title": "get_noteArguments"
+        }
+      },
+      {
+        "name": "search_notes",
+        "description": "Search note titles, contents, and tags.",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "title": "Query",
+              "type": "string"
+            },
+            "include_archived": {
+              "default": false,
+              "title": "Include Archived",
+              "type": "boolean"
+            },
+            "limit": {
+              "default": 20,
+              "title": "Limit",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "query"
+          ],
+          "title": "search_notesArguments"
+        }
+      },
+      {
+        "name": "update_note",
+        "description": "Update a note's title, content, or complete tag list.",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "note_id": {
+              "title": "Note Id",
+              "type": "string"
+            },
+            "title": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Title"
+            },
+            "content": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Content"
+            },
+            "tags": {
+              "anyOf": [
+                {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Tags"
+            }
+          },
+          "required": [
+            "note_id"
+          ],
+          "title": "update_noteArguments"
+        }
+      },
+      {
+        "name": "delete_note",
+        "description": "Permanently delete a note and its associated tags.",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "note_id": {
+              "title": "Note Id",
+              "type": "string"
+            }
+          },
+          "required": [
+            "note_id"
+          ],
+          "title": "delete_noteArguments"
+        }
+      },
+      {
+        "name": "list_notes",
+        "description": "List notes with pagination; archived notes are excluded by default.",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "include_archived": {
+              "default": false,
+              "title": "Include Archived",
+              "type": "boolean"
+            },
+            "limit": {
+              "default": 50,
+              "title": "Limit",
+              "type": "integer"
+            },
+            "offset": {
+              "default": 0,
+              "title": "Offset",
+              "type": "integer"
+            }
+          },
+          "title": "list_notesArguments"
+        }
+      },
+      {
+        "name": "add_note_tags",
+        "description": "Add tags to an existing note without replacing its current tags.",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "note_id": {
+              "title": "Note Id",
+              "type": "string"
+            },
+            "tags": {
+              "items": {
+                "type": "string"
+              },
+              "title": "Tags",
+              "type": "array"
+            }
+          },
+          "required": [
+            "note_id",
+            "tags"
+          ],
+          "title": "add_note_tagsArguments"
+        }
+      },
+      {
+        "name": "retrieve_notes_by_tag",
+        "description": "Retrieve notes matching a specific tag.",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "tag": {
+              "title": "Tag",
+              "type": "string"
+            },
+            "include_archived": {
+              "default": false,
+              "title": "Include Archived",
+              "type": "boolean"
+            },
+            "limit": {
+              "default": 20,
+              "title": "Limit",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "tag"
+          ],
+          "title": "retrieve_notes_by_tagArguments"
+        }
+      },
+      {
+        "name": "archive_note",
+        "description": "Archive a note without permanently deleting it.",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "note_id": {
+              "title": "Note Id",
+              "type": "string"
+            }
+          },
+          "required": [
+            "note_id"
+          ],
+          "title": "archive_noteArguments"
+        }
+      },
+      {
+        "name": "restore_note",
+        "description": "Restore an archived note.",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "note_id": {
+              "title": "Note Id",
+              "type": "string"
+            }
+          },
+          "required": [
+            "note_id"
+          ],
+          "title": "restore_noteArguments"
+        }
+      }
+    ]
+  },
+  {
+    "server": "github",
+    "tools": [
+      {
+        "name": "search_repositories",
+        "description": "Search GitHub repositories by keywords, language, or topic.",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "title": "Query",
+              "type": "string"
+            },
+            "sort": {
+              "default": "best-match",
+              "title": "Sort",
+              "type": "string"
+            },
+            "order": {
+              "default": "desc",
+              "title": "Order",
+              "type": "string"
+            },
+            "per_page": {
+              "default": 10,
+              "title": "Per Page",
+              "type": "integer"
+            },
+            "page": {
+              "default": 1,
+              "title": "Page",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "query"
+          ],
+          "title": "search_repositoriesArguments"
+        }
+      },
+      {
+        "name": "get_repository_details",
+        "description": "Retrieve repository metadata, statistics, and configuration.",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "owner": {
+              "title": "Owner",
+              "type": "string"
+            },
+            "repo": {
+              "title": "Repo",
+              "type": "string"
+            }
+          },
+          "required": [
+            "owner",
+            "repo"
+          ],
+          "title": "get_repository_detailsArguments"
+        }
+      },
+      {
+        "name": "list_issues",
+        "description": "List repository issues, optionally filtered by state.",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "owner": {
+              "title": "Owner",
+              "type": "string"
+            },
+            "repo": {
+              "title": "Repo",
+              "type": "string"
+            },
+            "state": {
+              "default": "open",
+              "title": "State",
+              "type": "string"
+            },
+            "per_page": {
+              "default": 20,
+              "title": "Per Page",
+              "type": "integer"
+            },
+            "page": {
+              "default": 1,
+              "title": "Page",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "owner",
+            "repo"
+          ],
+          "title": "list_issuesArguments"
+        }
+      },
+      {
+        "name": "get_issue_details",
+        "description": "Retrieve the details of a specific GitHub issue.",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "owner": {
+              "title": "Owner",
+              "type": "string"
+            },
+            "repo": {
+              "title": "Repo",
+              "type": "string"
+            },
+            "issue_number": {
+              "title": "Issue Number",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "owner",
+            "repo",
+            "issue_number"
+          ],
+          "title": "get_issue_detailsArguments"
+        }
+      },
+      {
+        "name": "create_issue",
+        "description": "Create a GitHub issue in a repository.",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "owner": {
+              "title": "Owner",
+              "type": "string"
+            },
+            "repo": {
+              "title": "Repo",
+              "type": "string"
+            },
+            "title": {
+              "title": "Title",
+              "type": "string"
+            },
+            "body": {
+              "title": "Body",
+              "type": "string"
+            },
+            "labels": {
+              "anyOf": [
+                {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Labels"
+            },
+            "assignees": {
+              "anyOf": [
+                {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Assignees"
+            }
+          },
+          "required": [
+            "owner",
+            "repo",
+            "title",
+            "body"
+          ],
+          "title": "create_issueArguments"
+        }
+      },
+      {
+        "name": "update_issue",
+        "description": "Update an existing GitHub issue.",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "owner": {
+              "title": "Owner",
+              "type": "string"
+            },
+            "repo": {
+              "title": "Repo",
+              "type": "string"
+            },
+            "issue_number": {
+              "title": "Issue Number",
+              "type": "integer"
+            },
+            "title": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Title"
+            },
+            "body": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Body"
+            },
+            "state": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "State"
+            }
+          },
+          "required": [
+            "owner",
+            "repo",
+            "issue_number"
+          ],
+          "title": "update_issueArguments"
+        }
+      },
+      {
+        "name": "list_pull_requests",
+        "description": "List pull requests in a GitHub repository.",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "owner": {
+              "title": "Owner",
+              "type": "string"
+            },
+            "repo": {
+              "title": "Repo",
+              "type": "string"
+            },
+            "state": {
+              "default": "open",
+              "title": "State",
+              "type": "string"
+            },
+            "per_page": {
+              "default": 20,
+              "title": "Per Page",
+              "type": "integer"
+            },
+            "page": {
+              "default": 1,
+              "title": "Page",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "owner",
+            "repo"
+          ],
+          "title": "list_pull_requestsArguments"
+        }
+      },
+      {
+        "name": "get_pull_request_details",
+        "description": "Retrieve details of a specific pull request.",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "owner": {
+              "title": "Owner",
+              "type": "string"
+            },
+            "repo": {
+              "title": "Repo",
+              "type": "string"
+            },
+            "pull_number": {
+              "title": "Pull Number",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "owner",
+            "repo",
+            "pull_number"
+          ],
+          "title": "get_pull_request_detailsArguments"
+        }
+      },
+      {
+        "name": "create_pull_request_comment",
+        "description": "Create a conversation comment on a pull request.",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "owner": {
+              "title": "Owner",
+              "type": "string"
+            },
+            "repo": {
+              "title": "Repo",
+              "type": "string"
+            },
+            "pull_number": {
+              "title": "Pull Number",
+              "type": "integer"
+            },
+            "body": {
+              "title": "Body",
+              "type": "string"
+            }
+          },
+          "required": [
+            "owner",
+            "repo",
+            "pull_number",
+            "body"
+          ],
+          "title": "create_pull_request_commentArguments"
+        }
+      },
+      {
+        "name": "search_code",
+        "description": "Search GitHub code, optionally restricted to one repository.",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "title": "Query",
+              "type": "string"
+            },
+            "owner": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Owner"
+            },
+            "repo": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Repo"
+            },
+            "per_page": {
+              "default": 10,
+              "title": "Per Page",
+              "type": "integer"
+            },
+            "page": {
+              "default": 1,
+              "title": "Page",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "query"
+          ],
+          "title": "search_codeArguments"
+        }
+      }
+    ]
+  },
+  {
+    "server": "calendar",
+    "tools": [
+      {
+        "name": "list_calendars",
+        "description": "List calendars accessible to the authenticated Google account.",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "max_results": {
+              "default": 100,
+              "title": "Max Results",
+              "type": "integer"
+            },
+            "page_token": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Page Token"
+            }
+          },
+          "title": "list_calendarsArguments"
+        }
+      },
+      {
+        "name": "get_events",
+        "description": "Retrieve events from a calendar within a timezone-aware time range.",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "calendar_id": {
+              "title": "Calendar Id",
+              "type": "string"
+            },
+            "time_min": {
+              "title": "Time Min",
+              "type": "string"
+            },
+            "time_max": {
+              "title": "Time Max",
+              "type": "string"
+            },
+            "max_results": {
+              "default": 50,
+              "title": "Max Results",
+              "type": "integer"
+            },
+            "page_token": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Page Token"
+            }
+          },
+          "required": [
+            "calendar_id",
+            "time_min",
+            "time_max"
+          ],
+          "title": "get_eventsArguments"
+        }
+      },
+      {
+        "name": "get_event_details",
+        "description": "Retrieve the details of one calendar event.",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "calendar_id": {
+              "title": "Calendar Id",
+              "type": "string"
+            },
+            "event_id": {
+              "title": "Event Id",
+              "type": "string"
+            }
+          },
+          "required": [
+            "calendar_id",
+            "event_id"
+          ],
+          "title": "get_event_detailsArguments"
+        }
+      },
+      {
+        "name": "create_event",
+        "description": "Create a calendar event with optional description and location.",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "calendar_id": {
+              "title": "Calendar Id",
+              "type": "string"
+            },
+            "summary": {
+              "title": "Summary",
+              "type": "string"
+            },
+            "start": {
+              "title": "Start",
+              "type": "string"
+            },
+            "end": {
+              "title": "End",
+              "type": "string"
+            },
+            "description": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Description"
+            },
+            "location": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Location"
+            },
+            "time_zone": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Time Zone"
+            }
+          },
+          "required": [
+            "calendar_id",
+            "summary",
+            "start",
+            "end"
+          ],
+          "title": "create_eventArguments"
+        }
+      },
+      {
+        "name": "update_event",
+        "description": "Update selected fields of an existing calendar event.",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "calendar_id": {
+              "title": "Calendar Id",
+              "type": "string"
+            },
+            "event_id": {
+              "title": "Event Id",
+              "type": "string"
+            },
+            "summary": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Summary"
+            },
+            "description": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Description"
+            },
+            "location": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Location"
+            },
+            "start": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Start"
+            },
+            "end": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "End"
+            },
+            "time_zone": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Time Zone"
+            }
+          },
+          "required": [
+            "calendar_id",
+            "event_id"
+          ],
+          "title": "update_eventArguments"
+        }
+      },
+      {
+        "name": "delete_event",
+        "description": "Delete a calendar event.",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "calendar_id": {
+              "title": "Calendar Id",
+              "type": "string"
+            },
+            "event_id": {
+              "title": "Event Id",
+              "type": "string"
+            }
+          },
+          "required": [
+            "calendar_id",
+            "event_id"
+          ],
+          "title": "delete_eventArguments"
+        }
+      },
+      {
+        "name": "check_availability",
+        "description": "Check busy periods across one or more calendars.",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "time_min": {
+              "title": "Time Min",
+              "type": "string"
+            },
+            "time_max": {
+              "title": "Time Max",
+              "type": "string"
+            },
+            "calendar_ids": {
+              "items": {
+                "type": "string"
+              },
+              "title": "Calendar Ids",
+              "type": "array"
+            },
+            "time_zone": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Time Zone"
+            }
+          },
+          "required": [
+            "time_min",
+            "time_max",
+            "calendar_ids"
+          ],
+          "title": "check_availabilityArguments"
+        }
+      },
+      {
+        "name": "find_free_slots",
+        "description": "Find free meeting slots across one or more calendars.",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "time_min": {
+              "title": "Time Min",
+              "type": "string"
+            },
+            "time_max": {
+              "title": "Time Max",
+              "type": "string"
+            },
+            "calendar_ids": {
+              "items": {
+                "type": "string"
+              },
+              "title": "Calendar Ids",
+              "type": "array"
+            },
+            "duration_minutes": {
+              "title": "Duration Minutes",
+              "type": "integer"
+            },
+            "time_zone": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Time Zone"
+            },
+            "max_slots": {
+              "default": 20,
+              "title": "Max Slots",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "time_min",
+            "time_max",
+            "calendar_ids",
+            "duration_minutes"
+          ],
+          "title": "find_free_slotsArguments"
+        }
+      }
+    ]
+  }
+]

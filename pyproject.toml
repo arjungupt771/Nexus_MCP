@@ -1,0 +1,60 @@
+
+[build-system]
+requires = ["setuptools>=75", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nexus-mcp"
+version = "0.1.0"
+description = "Multi-server MCP integration and agent orchestration platform"
+readme = "docs/PROJECT_SPECIFICATION.md"
+requires-python = ">=3.13,<3.14"
+dependencies = [
+    "fastapi>=0.115,<1.0",
+    "uvicorn[standard]>=0.34,<1.0",
+    "pydantic>=2.10,<3.0",
+    "pydantic-settings>=2.7,<3.0",
+    "httpx>=0.28,<1.0",
+    "python-dotenv>=1.0,<2.0",
+    "structlog>=25.1,<26.0",
+    "tenacity>=9.0,<10.0",
+    "sqlalchemy>=2.0,<3.0",
+    "alembic>=1.14,<2.0",
+    "psycopg[binary]>=3.2,<4.0",
+    "mcp[cli]>=2.0,<3.0",
+    "langgraph>=1.0,<2.0",
+    "langchain-google-genai>=4.0,<5.0",
+    "langchain-groq>=1.0,<2.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3,<9.0",
+    "pytest-asyncio>=0.25,<2.0",
+    "pytest-cov>=6.0,<8.0",
+    "ruff>=0.9,<1.0",
+    "mypy>=1.14,<2.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["apps*", "agent*", "core*", "mcp_servers*", "observability*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests", "apps/backend/tests", "agent/tests", "mcp_servers"]
+python_files = ["test_*.py"]
+asyncio_mode = "auto"
+addopts = "-ra"
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.mypy]
+python_version = "3.13"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
