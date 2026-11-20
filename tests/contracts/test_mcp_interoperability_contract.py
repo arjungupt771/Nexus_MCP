@@ -7,9 +7,7 @@ from contextlib import AsyncExitStack
 from pathlib import Path
 
 import pytest
-
 from mcp import Client, StdioServerParameters
-
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 

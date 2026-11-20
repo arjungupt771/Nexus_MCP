@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from collections.abc import Callable
-from typing import Any, TypeVar
+from typing import Any
 
 from mcp.server import MCPServer
 
@@ -15,10 +15,8 @@ from mcp_servers.calendar.service import (
     GoogleCalendarService,
 )
 
-T = TypeVar("T")
 
-
-def _execute(operation: Callable[[], T]) -> dict[str, Any]:
+def _execute[T](operation: Callable[[], T]) -> dict[str, Any]:
     """Execute a service operation and return a safe response envelope."""
     try:
         return {

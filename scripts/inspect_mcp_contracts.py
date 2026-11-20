@@ -6,9 +6,9 @@ import json
 
 from mcp import Client
 
-from mcp_servers.notes.server import create_notes_server
-from mcp_servers.github.server import create_github_server
 from mcp_servers.calendar.server import create_calendar_server
+from mcp_servers.github.server import create_github_server
+from mcp_servers.notes.server import create_notes_server
 
 
 async def inspect_server(name, factory):
